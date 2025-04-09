@@ -1,28 +1,26 @@
+let display = document.getElementById('display');
+
+function appendNumber(num) {
+  display.value += num;
+}
+
+function appendOperator(op) {
+  display.value += ` ${op} `;
+}
+
+function clearDisplay() {
+  display.value = '';
+}
+
+function deleteLast() {
+  display.value = display.value.trim();
+  display.value = display.value.slice(0, display.value.length - 1);
+}
+
 function calculate() {
-    const a = parseFloat(document.getElementById('num1').value);
-    const b = parseFloat(document.getElementById('num2').value);
-    const op = document.getElementById('operator').value;
-    let result;
-  
-    switch (op) {
-      case 'add':
-        result = a + b;
-        break;
-      case 'subtract':
-        result = a - b;
-        break;
-      case 'multiply':
-        result = a * b;
-        break;
-      case 'divide':
-        if (b === 0) {
-          result = 'Cannot divide by zero';
-        } else {
-          result = a / b;
-        }
-        break;
-    }
-  
-    document.getElementById('result').textContent = result;
+  try {
+    display.value = eval(display.value.replace(/×/g, '*').replace(/÷/g, '/'));
+  } catch (e) {
+    display.value = 'Error';
   }
-  
+}
